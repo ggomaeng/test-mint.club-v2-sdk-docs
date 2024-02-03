@@ -74,8 +74,8 @@ const txReceipt = bondContract.network('ethereum').write({
   onSigned: (txHash) => {
     console.log(txHash);
   },
-  onSuccess: (txHash) => {
-    console.log(txHash);
+  onSuccess: (receipt) => {
+    console.log(receipt);
   },
   onError: (error) => {
     console.dir(error);
@@ -147,8 +147,8 @@ await bondContract.network('sepolia').createToken({
       onSigned: (txHash) => {
         console.log(txHash);
       },
-      onSuccess: (txHash) => {
-        console.log(txHash);
+      onSuccess: (receipt) => {
+        console.log(receipt);
       },
       onError: (error) => {
         console.dir(error);
