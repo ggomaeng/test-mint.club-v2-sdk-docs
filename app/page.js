@@ -66,19 +66,19 @@ const data = bondContract.network('ethereum').read({
 
 // write to the contract
 const txReceipt = bondContract.network('ethereum').write({
-  functionName: 'tokenCount',
-  args: [],
-  onError: (error) => {
-    console.dir(error);
-  },
-  onSuccess: (txHash) => {
-    console.log(txHash);
-  },
+  functionName: 'someFunction',
+  args: [...someArgs],
   onRequestSignature: () => {
     console.log('signature');
   },
   onSigned: (txHash) => {
     console.log(txHash);
+  },
+  onSuccess: (txHash) => {
+    console.log(txHash);
+  },
+  onError: (error) => {
+    console.dir(error);
   },
 })
 
@@ -141,18 +141,19 @@ await bondContract.network('sepolia').createToken({
         { x: 10000000, y: 15 },
       ],
 
-      onError: (error) => {
-        console.dir(error);
-      },
-      onSuccess: (txHash) => {
-        console.log(txHash);
-      },
       onRequestSignature: () => {
         console.log('signature');
       },
       onSigned: (txHash) => {
         console.log(txHash);
       },
+      onSuccess: (txHash) => {
+        console.log(txHash);
+      },
+      onError: (error) => {
+        console.dir(error);
+      },
+     
 });
       `}
             language={"ts"}
