@@ -263,7 +263,7 @@ const txReceipt = await bondContract
         </div>
         <div className="mt-4 text-white">
           <div>
-            If you are unsure about what to pass to the read/write function,
+            - If you are unsure about what to pass to the read/write function,
             please refer to the{" "}
             <a
               target="_blank"
@@ -273,8 +273,9 @@ const txReceipt = await bondContract
               the contract repo
             </a>
           </div>
+
           <div className="mt-5">
-            You can see all the read/write functions on{" "}
+            - You can see all the read/write functions on{" "}
             <a
               target="_blank"
               className="text-link"
@@ -282,10 +283,22 @@ const txReceipt = await bondContract
             >
               etherscan
             </a>
-            <div className="mt-5">
-              Typescript autocomplete will help you with the function names and
-              arguments needed
-            </div>
+          </div>
+
+          <div className="mt-5">
+            - Need more info about Mint Club? Check the{" "}
+            <a
+              target="_blank"
+              className="text-link"
+              href="https://docs.mint.club"
+            >
+              docs
+            </a>
+          </div>
+
+          <div className="mt-5">
+            - Typescript autocomplete will help you with the function names and
+            arguments needed
           </div>
 
           <div className="mt-10 flex gap-5 flex-wrap">
