@@ -305,14 +305,14 @@ const txReceipt = await bondContract
             <a
               target="_blank"
               className="text-link"
-              href="https://github.com/Steemhunt/mint.club-v2-contract/blob/main/test/Bond.test.js"
+              href="https://github.com/ggomaeng/test-mint.club-v2-sdk"
             >
               SDK repo
             </a>
             <a
               target="_blank"
               className="text-link"
-              href="https://github.com/Steemhunt/mint.club-v2-contract/blob/main/test/Bond.test.js"
+              href="https://github.com/ggomaeng/test-mint.club-v2-sdk-docs"
             >
               Docs repo (this website - made with React)
             </a>
