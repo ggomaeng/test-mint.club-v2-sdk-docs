@@ -249,13 +249,24 @@ const txReceipt = await bondContract.network('sepolia').write({ ... });
 // you could also pass the connected address
 const txReceipt = await bondContract
       .network('sepolia')
-      .withAccount('0xdeadbeef') // connected wallet address
+      .withAccount('0xdeadbeef')
       .write({ ... });
 
-// you could also call it with a private key
+// ... or a different provider than window.ethereum
+const withOKX = await bondContract
+      .network('sepolia')
+      .withProvider(window.okex)
+      .write({ ... });
+
+const otherProvider = await bondContract
+      .network('sepolia')
+      .withProvider(new Web3Provider(...))
+      .write({ ... });
+
+// ... or with a private key
 const txReceipt = await bondContract
       .network('sepolia')
-      .withPrivateKey('0xdeadbeef') // or with private key
+      .withPrivateKey('0xdeadbeef')
       .write({ ... });`}
             language={"ts"}
             theme={rainbow}
