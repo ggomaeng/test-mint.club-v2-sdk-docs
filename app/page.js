@@ -1,20 +1,20 @@
-'use client';
-import { useEffect, useState } from 'react';
-import { CopyBlock, rainbow } from 'react-code-blocks';
-import { bondContract } from 'test-mint.club-v2-sdk';
-import icon from '../public/apple-touch-icon.png';
-import Image from 'next/image';
+"use client";
+import { useEffect, useState } from "react";
+import { CopyBlock, rainbow } from "react-code-blocks";
+import { bondContract } from "test-mint.club-v2-sdk";
+import icon from "../public/apple-touch-icon.png";
+import Image from "next/image";
 
 export default function Home() {
   const [tokenCount, setTokenCount] = useState(0);
-  const [name, setName] = useState('Baby Token');
-  const [symbol, setSymbol] = useState('BABY');
+  const [name, setName] = useState("Baby Token");
+  const [symbol, setSymbol] = useState("BABY");
 
   useEffect(() => {
     bondContract
-      .network('ethereum')
+      .network("ethereum")
       .read({
-        functionName: 'tokenCount',
+        functionName: "tokenCount",
         args: [],
       })
       .then((count) => {
@@ -26,13 +26,15 @@ export default function Home() {
   return (
     <div className="flex items-center justify-center text-start min-h-screen flex-col px-10 py-20">
       <Image src={icon} alt="Mint Club" width={100} height={100} />
-      <div className="text-center text-lg md:text-3xl mt-20 font-bold text-white">Mint Club SDK - Minimal Example</div>
+      <div className="text-center text-lg md:text-3xl mt-20 font-bold text-white">
+        Mint Club SDK - Minimal Example
+      </div>
       <div className="w-[800px] max-w-full mt-10">
         <div className="mt-20 text-primary text-lg font-bold">Install</div>
         <div className="text-sm mt-4 w-full overflow-scroll">
           <CopyBlock
             customStyle={{ padding: 10 }}
-            language={'ts'}
+            language={"ts"}
             theme={rainbow}
             wrapLongLines
             text={`npm i test-mint.club-v2-sdk`}
@@ -41,14 +43,16 @@ export default function Home() {
 
         <div className="mt-20 text-primary text-lg font-bold">Basic Usage</div>
         <div>
-          You can basically call any read/write calls from the contract. I have provided the{' '}
-          <span className="text-primary">{'"createToken"'}</span> wrapper for you in the next section. If you need any
-          more wrappers like <span className="text-primary">{'"createToken"'}</span>, please let me know.
+          You can basically call any read/write calls from the contract. I have
+          provided the <span className="text-primary">{'"createToken"'}</span>{" "}
+          wrapper for you in the next section. If you need any more wrappers
+          like <span className="text-primary">{'"createToken"'}</span>, please
+          let me know.
         </div>
         <div className="text-sm mt-4 w-full overflow-scroll">
           <CopyBlock
             customStyle={{ padding: 10 }}
-            language={'ts'}
+            language={"ts"}
             theme={rainbow}
             wrapLongLines
             text={`// import the sdk
@@ -88,7 +92,9 @@ const data = bondContract.network(1).read({
           />
         </div>
 
-        <div className="mt-10 text-primary text-lg font-bold">Creating tokens</div>
+        <div className="mt-10 text-primary text-lg font-bold">
+          Creating tokens
+        </div>
         <div>Below is the example code for creating a token.</div>
         <div className="mt-4">
           <label className="w-[120px]">Name</label>
@@ -149,7 +155,7 @@ await bondContract.network('sepolia').createToken({
       },
 });
       `}
-            language={'ts'}
+            language={"ts"}
             theme={rainbow}
             wrapLongLines
           />
@@ -157,14 +163,14 @@ await bondContract.network('sepolia').createToken({
         <button
           className="bg-primary px-4 py-2 mt-5 text-black font-black"
           onClick={async () => {
-            await bondContract.network('sepolia').createToken({
-              tokenType: 'ERC20',
+            await bondContract.network("sepolia").createToken({
+              tokenType: "ERC20",
               name,
               symbol,
               mintRoyalty: 1, // 1%
               burnRoyalty: 1.5, // 1.5%
               reserveToken: {
-                address: '0xfFf9976782d46CC05630D1f6eBAb18b2324d6B14', // WETH
+                address: "0xfFf9976782d46CC05630D1f6eBAb18b2324d6B14", // WETH
                 decimals: 18,
               },
               maxSupply: 10_000_000, // supply: 10M
@@ -186,7 +192,7 @@ await bondContract.network('sepolia').createToken({
                 console.log(txHash);
               },
               onRequestSignature: () => {
-                console.log('signature');
+                console.log("signature");
               },
               onSigned: (txHash) => {
                 console.log(txHash);
@@ -199,14 +205,14 @@ await bondContract.network('sepolia').createToken({
 
         <div className="mt-20 text-primary text-lg font-bold">Read calls</div>
         <div className="text-base font-normal">
-          You can read from the contract using the <code>read</code> method. It returns a promise with the result.
+          You can read from the contract using the <code>read</code> method. It
+          returns a promise with the result.
         </div>
         <div className="text-sm mt-4 w-full overflow-scroll">
           <CopyBlock
             customStyle={{ padding: 10 }}
             text={`// reading from contract on a specific network
 import { bondContract } from 'test-mint.club-v2-sdk';
-
 
 const tokenCount = bondContract.network('ethereum').read({
     functionName: 'tokenCount',
@@ -221,13 +227,44 @@ const tokenCount = bondContract.network(1).read({
 
 console.log(tokenCount); // some big number
       `}
-            language={'ts'}
+            language={"ts"}
             theme={rainbow}
             wrapLongLines
           />
         </div>
         <div className="mt-4 text-white">
-          Ethereum token count: <span className="text-primary">{tokenCount.toString()}</span>
+          Ethereum token count:{" "}
+          <span className="text-primary">{tokenCount.toString()}</span>
+        </div>
+
+        <div className="mt-20 text-primary text-lg font-bold">Extra ✨</div>
+        <div className="text-sm mt-4 w-full overflow-scroll">
+          <CopyBlock
+            customStyle={{ padding: 10 }}
+            text={`import { bondContract } from 'test-mint.club-v2-sdk';
+
+ // write call should automatically prompt the user to connect wallet & switch chains
+const txReceipt = await bondContract.network('sepolia').write({ ... });
+
+// you could also pass the connected address
+const txReceipt = await bondContract
+      .network('sepolia')
+      .withAccount('0xdeadbeef') // connected wallet address
+      .write({ ... });
+
+// you could also call it with a private key
+const txReceipt = await bondContract
+      .network('sepolia')
+      .withPrivateKey('0xdeadbeef') // or with private key
+      .write({ ... });`}
+            language={"ts"}
+            theme={rainbow}
+            wrapLongLines
+          />
+        </div>
+        <div className="mt-4 text-white">
+          Ethereum token count:{" "}
+          <span className="text-primary">{tokenCount.toString()}</span>
         </div>
       </div>
     </div>
