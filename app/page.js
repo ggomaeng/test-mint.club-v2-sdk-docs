@@ -262,8 +262,58 @@ const txReceipt = await bondContract
           />
         </div>
         <div className="mt-4 text-white">
-          Ethereum token count:{" "}
-          <span className="text-primary">{tokenCount.toString()}</span>
+          <div>
+            If you are unsure about what to pass to the read/write function,
+            please refer to the{" "}
+            <a
+              target="_blank"
+              className="text-link"
+              href="https://github.com/Steemhunt/mint.club-v2-contract/blob/main/test/Bond.test.js"
+            >
+              the contract repo
+            </a>
+          </div>
+          <div className="mt-5">
+            You can see all the read/write functions on{" "}
+            <a
+              target="_blank"
+              className="text-link"
+              href="https://etherscan.io/address/0xc5a076cad94176c2996b32d8466be1ce757faa27#readContract"
+            >
+              etherscan
+            </a>
+            <div className="mt-5">
+              Typescript autocomplete will help you with the function names and
+              arguments needed
+            </div>
+          </div>
+
+          <div className="mt-10 flex gap-5 flex-wrap">
+            <a
+              target="_blank"
+              className="text-link"
+              href="https://github.com/Steemhunt/mint.club-v2-contract/blob/main/test/Bond.test.js"
+            >
+              SDK repo
+            </a>
+            <a
+              target="_blank"
+              className="text-link"
+              href="https://github.com/Steemhunt/mint.club-v2-contract/blob/main/test/Bond.test.js"
+            >
+              Docs repo (this website - made with React)
+            </a>
+          </div>
+          <div className="text-grey text-sm mt-5">
+            Made with ❤️ by{" "}
+            <a
+              target="_blank"
+              className="text-link"
+              href="https://twitter.com/@0xggoma"
+            >
+              @0xggoma
+            </a>
+          </div>
         </div>
       </div>
     </div>
