@@ -225,8 +225,7 @@ const tokenCount = bondContract.network(1).read({
     args: [],
 });
 
-console.log(tokenCount); // some big number
-      `}
+console.log(tokenCount); // some big number`}
             language={"ts"}
             theme={rainbow}
             wrapLongLines
