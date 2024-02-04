@@ -66,8 +66,8 @@ const data = bondContract.network('ethereum').read({
 
 // write to the contract
 const txReceipt = bondContract.network('ethereum').write({
-  functionName: 'someFunction',
-  args: [...someArgs],
+  functionName: 'someWriteFunction',
+  args: [...write function args],
   onRequestSignature: () => {
     console.log('signature');
   },
@@ -120,52 +120,51 @@ const data = bondContract.network(1).read({
             customStyle={{ padding: 10 }}
             text={`// creating a new token
 await bondContract.network('sepolia').createToken({
-      tokenType: 'ERC20',
-      name: "${name}",
-      symbol: "${symbol}",
+      name: '${name}',
+      symbol: '${symbol}',
       mintRoyalty: 1, // 1%
       burnRoyalty: 1.5, // 1.5%
       reserveToken: {
-        address: '0xfFf9976782d46CC05630D1f6eBAb18b2324d6B14', // WETH
+        address: "0xfFf9976782d46CC05630D1f6eBAb18b2324d6B14", // WETH
         decimals: 18,
       },
-      maxSupply: 10_000_000, // supply: 10M
-      creatorAllocation: 10_000,
       stepData: [
-        { x: 100000, y: 2 },
-        { x: 200000, y: 3 },
-        { x: 500000, y: 4 },
-        { x: 1000000, y: 5 },
-        { x: 2000000, y: 7 },
-        { x: 5000000, y: 10 },
-        { x: 10000000, y: 15 },
+        // creator allocation is determined if first step price is 0
+        // here the creator will get 10,000 tokens for free
+        { rangeTo: 10_000, price: 0 },
+        { rangeTo: 100_000, price: 2 },
+        { rangeTo: 200_000, price: 3 },
+        { rangeTo: 500_000, price: 4 },
+        { rangeTo: 1_000_000, price: 5 },
+        { rangeTo: 2_000_000, price: 7 },
+        { rangeTo: 5_000_000, price: 10 },
+        // max supply is determined by the last step rangeTo
+        // here, the max supply is 10,000,000
+        { rangeTo: 10_000_000, price: 15 },
       ],
 
+      onError: (error) => {
+        console.dir(error);
+      },
+      onSuccess: (txHash) => {
+        console.log(txHash);
+      },
       onRequestSignature: () => {
-        console.log('signature');
+        console.log("signature");
       },
       onSigned: (txHash) => {
         console.log(txHash);
       },
-      onSuccess: (receipt) => {
-        console.log(receipt);
-      },
-      onError: (error) => {
-        console.dir(error);
-      },
-     
-});
-      `}
+});`}
             language={"ts"}
             theme={rainbow}
             wrapLongLines
           />
         </div>
         <button
-          className="bg-primary px-4 py-2 mt-5 text-black font-black"
+          className="bg-primary px-4 py-2 mt-5 text-black font-bold"
           onClick={async () => {
             await bondContract.network("sepolia").createToken({
-              tokenType: "ERC20",
               name,
               symbol,
               mintRoyalty: 1, // 1%
@@ -174,16 +173,17 @@ await bondContract.network('sepolia').createToken({
                 address: "0xfFf9976782d46CC05630D1f6eBAb18b2324d6B14", // WETH
                 decimals: 18,
               },
-              maxSupply: 10_000_000, // supply: 10M
-              creatorAllocation: 10_000,
               stepData: [
-                { x: 100000, y: 2 },
-                { x: 200000, y: 3 },
-                { x: 500000, y: 4 },
-                { x: 1000000, y: 5 },
-                { x: 2000000, y: 7 },
-                { x: 5000000, y: 10 },
-                { x: 10000000, y: 15 },
+                // creator allocation is determined if first step price is 0
+                { rangeTo: 10_000, price: 0 },
+                { rangeTo: 100_000, price: 2 },
+                { rangeTo: 200_000, price: 3 },
+                { rangeTo: 500_000, price: 4 },
+                { rangeTo: 1_000_000, price: 5 },
+                { rangeTo: 2_000_000, price: 7 },
+                { rangeTo: 5_000_000, price: 10 },
+                // max supply is determined by the last step rangeTo
+                { rangeTo: 10_000_000, price: 15 },
               ],
 
               onError: (error) => {
