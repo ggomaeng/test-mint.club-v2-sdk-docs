@@ -193,9 +193,15 @@ await bondContract.network('sepolia').createToken({
 
               onError: (error) => {
                 console.dir(error);
-                toast.error(
-                  `Error creating token. Check the console\n${error?.metaMessages?.[0]}`
-                );
+                if (error?.name === "ContractFunctionExecutionError") {
+                  toast.error(
+                    `Create Error. Check the console\n${error?.metaMessages?.[0]}`
+                  );
+                } else {
+                  toast.error(
+                    `Create Error - ${error?.details || error?.message}`
+                  );
+                }
               },
               onSuccess: (txHash) => {
                 console.log(txHash);

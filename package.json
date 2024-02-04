@@ -14,7 +14,7 @@
     "react-code-blocks": "^0.1.6",
     "react-dom": "^18",
     "react-hot-toast": "^2.4.1",
-    "test-mint.club-v2-sdk": "^0.0.46"
+    "test-mint.club-v2-sdk": "^0.0.48"
   },
   "devDependencies": {
     "autoprefixer": "^10.0.1",
