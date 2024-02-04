@@ -4,6 +4,7 @@ import { CopyBlock, rainbow } from "react-code-blocks";
 import { bondContract } from "test-mint.club-v2-sdk";
 import icon from "../public/apple-touch-icon.png";
 import Image from "next/image";
+import toast from "react-hot-toast";
 
 export default function Home() {
   const [tokenCount, setTokenCount] = useState(0);
@@ -145,15 +146,19 @@ await bondContract.network('sepolia').createToken({
 
       onError: (error) => {
         console.dir(error);
+        toast.error(\`Error creating token - \${error.message}\`);
       },
       onSuccess: (txHash) => {
         console.log(txHash);
+        toast.success(\`Token created - \${txHash}\`);
       },
       onRequestSignature: () => {
         console.log("signature");
+        toast(\`Please sign the transaction.\`);
       },
       onSigned: (txHash) => {
         console.log(txHash);
+        toast.success(\`Transaction signed - \${txHash}\`);
       },
 });`}
             language={"ts"}
@@ -188,15 +193,21 @@ await bondContract.network('sepolia').createToken({
 
               onError: (error) => {
                 console.dir(error);
+                toast.error(
+                  `Error creating token. Check the console\n${error?.metaMessages?.[0]}`
+                );
               },
               onSuccess: (txHash) => {
                 console.log(txHash);
+                toast.success(`Token created - ${txHash}`);
               },
               onRequestSignature: () => {
                 console.log("signature");
+                toast(`Please sign the transaction.`);
               },
               onSigned: (txHash) => {
                 console.log(txHash);
+                toast.success(`Transaction signed - ${txHash}`);
               },
             });
           }}
